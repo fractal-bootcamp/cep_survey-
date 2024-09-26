@@ -1,16 +1,17 @@
 {
-  "name": "express-app",
+  "name": "mkdir-survey-app",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.17"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/node": "^22.7.2",
     "cors": "^2.8.5",
     "express": "^4.21.0"
   }

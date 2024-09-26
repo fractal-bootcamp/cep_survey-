@@ -1,55 +1,34 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import axios from "axios";
+import { useState } from 'react'
+import './App.css'
+import axios from 'axios';
 
-const serverURL = "http://localhost:3000";
-
-type Message = { content: string; name: string };
+const serverUrl = "http://localhost:3000";
 
 function App() {
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [name, setName] = useState("");
+    const [message, setMessage] = useState("")
 
-  const onFormSubmit = () => {
-    axios.post(serverURL + "/submit", { name: name, message: message });
-  };
+    console.log(message)
 
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await axios.get(serverURL + "/messages");
-      console.log(res.data);
-      setMessages(res.data);
-    };
 
-    // make request
-    fetch();
-  }, []);
+    const onFormSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
+        // submit the message to the server.
+        console.log(message)
 
-  return (
-    <div>
-      <form
-        style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={onFormSubmit}
-      >
-        Name
-        <input value={name} onChange={(e) => setName(e.target.value)} />
-        Message
-        <input value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button type="submit">SEND MESSAGE</button>
-      </form>
-      {messages.map((msg) => {
-        return (
-          <div>
-            By:
-            {msg.name}
-            <br />
-            {msg.content}
-          </div>
-        );
-      })}
-    </div>
-  );
+        event.preventDefault(); // what does this do?
+        // prevents the default behavior of the form submission event.
+        const res = await axios.post(serverUrl + "/submit", { message: message })
+        console.log(res)
+    }
+
+    return (
+        <>
+            <h1> hello </h1>
+            <form onSubmit={onFormSubmit}>
+                <input onChange={(e) => setMessage(e.target.value)} value={message} type="text" name="message" />
+                <button type="submit">clickme</button>
+            </form>
+        </>
+    )
 }
 
-export default App;
+export default App
