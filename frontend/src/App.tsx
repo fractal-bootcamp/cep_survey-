@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios';
 
@@ -6,8 +6,15 @@ const serverUrl = "http://localhost:3000";
 
 function App() {
     const [message, setMessage] = useState("")
+    const [surveys, setSurveys] = useState([])
 
-    console.log(message)
+    useEffect(() => {
+        const getSurveys = async () => {
+            const res = await axios.get(serverUrl + "/surveys");
+            setSurveys(res.data)
+        }
+        getSurveys();
+    }, [])
 
 
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
@@ -23,10 +30,15 @@ function App() {
     return (
         <>
             <h1> hello </h1>
-            <form onSubmit={onFormSubmit}>
+            {/* <form onSubmit={onFormSubmit}>
                 <input onChange={(e) => setMessage(e.target.value)} value={message} type="text" name="message" />
                 <button type="submit">clickme</button>
-            </form>
+            </form> */}
+            {
+                surveys.map(survey => {
+                    return <div>{survey.name}</div>
+                })
+            }
         </>
     )
 }

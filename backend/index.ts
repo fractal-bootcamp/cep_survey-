@@ -1,5 +1,7 @@
-const express = require('express');
-const cors = require('cors')
+import client from "./prisma/client";
+import express from "express"
+import cors from "cors"
+
 const port = 3000;
 
 const app = express();
@@ -18,11 +20,29 @@ app.get('/', (req, res) => {
 
 });
 
+app.get("/surveys", async (req, res) => {
+    const surveys = await client.survey.findMany()
+
+    res.json(surveys)
+})
+
 app.post("/submit", (req, res) => {
     info.push(req.body)
     console.log('something', req);
     console.log(req.body)
     res.send(info);
+})
+
+app.post("/test", async (req, res) => {
+    const name = req.body.name
+
+    const newSurvey = await client.survey.create({
+        data: {
+            name: name
+        }
+    })
+
+    res.json(newSurvey)
 })
 
 app.listen(port, () => {
