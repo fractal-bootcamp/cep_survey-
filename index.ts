@@ -1,31 +1,31 @@
-const express = require('express');
-const cors = require('cors')
-const port = 3000;
+// const express = require('express');
+// const cors = require('cors')
+// const port = 3000;
 
-const app = express();
-app.use(cors());
+// const app = express();
+// app.use(cors());
 
 
 
-//Middleware
-app.use(express.json())
+// //Middleware
+// app.use(express.json())
 
-const info = [];
+// const info = [];
 
-app.get('/', (req, res) => {
-    res.send(info)
-    console.log('testing that logging works')
+// app.get('/', (req, res) => {
+//     res.send(info)
+//     console.log('testing that logging works')
 
-});
+// });
 
-app.post("/submit", (req, res) => {
-    info.push(req.body)
-    console.log('something', req);
-    console.log(req.body)
-    res.send(info);
-})
+// app.post("/submit", (req, res) => {
+//     info.push(req.body)
+//     console.log('something', req);
+//     console.log(req.body)
+//     res.send(info);
+// })
 
-app.listen(port, () => {
-    console.log(`we are listening on port ${port}`)
-    console.log(`access on http://localhost:${port}`)
-});
+// app.listen(port, () => {
+//     console.log(`we are listening on port ${port}`)
+//     console.log(`access on http://localhost:${port}`)
+// });

@@ -1,0 +1,19 @@
+What is Middleware? 
+
+It is those methods/functions/operations that are called BETWEEN processing the Request and sending the Response in your application method.
+
+you NEED express.json() and express.urlencoded() for POST and PUT requests 
+    because in both these requests you are sending data to the server that you are asking server to accept or store that data 
+
+    express.json() --> method built into express to recognize incoming request obejct as JSON object 
+        -- app.use(express.json());
+
+    express.urlencoded() --> metod built into express to recognize incoming request object as strings or arrays 
+        -- app.use(express.urlencoded());
+
+
+serve static files - images - css files - js files -- use express.static 
+ function signature is : 
+    -- express.static(root, [options])
+
+    

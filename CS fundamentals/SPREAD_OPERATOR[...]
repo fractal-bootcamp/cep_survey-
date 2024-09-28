@@ -1,0 +1,39 @@
+THE SPREAD OPERATOR [...]
+
+SHALLOW COPY - references original 
+
+when used with array [...arrayName] -> creates a shallow copy of an array 
+- creates new array (triggers RE_RENDER)- elements of new array are references to same objects of original array 
+- changes 
+    changes in the copy won't affect the original 
+    changes to objects or arrays within the copy will affect original 
+
+REACT relies on immutability to determine when to RE-RENDER
+    - immutability 
+
+
+    // Original array with primitive and object elements
+const original = [1, "hello", { name: "Alice" }, [10, 20]];
+
+    // Create a shallow copy
+const copy = [...original];
+
+    // Modifying primitive values
+    // DOES NOT MODIFY ORIGINAL
+copy[0] = 99;
+copy[1] = "world";
+
+console.log(original[0]); // Output: 1
+console.log(copy[0]);     // Output: 99
+console.log(original[1]); // Output: "hello"
+console.log(copy[1]);     // Output: "world"
+
+    // Modifying object values
+    //MODIFIES ORIGINAL
+copy[2].name = "Bob";
+copy[3].push(30);
+
+console.log(original[2].name); // Output: "Bob"
+console.log(copy[2].name);     // Output: "Bob"
+console.log(original[3]);      // Output: [10, 20, 30]
+console.log(copy[3]);          // Output: [10, 20, 30]

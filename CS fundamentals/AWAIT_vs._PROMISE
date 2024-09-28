@@ -1,0 +1,17 @@
+
+
+main difference in how they handle asynchronous functions
+
+PROMISES:
+ using Methods
+    .then (handles successes, handles erroes); .catch (error handling) ; .finally (passes through - used for cleanup check)
+
+ASYNC/await
+ write asynchronous code that looks & behaves more like synchronus code 
+ *more readable 
+ using Blocks
+    .try & .catch --> for error handling
+ASYNC function always returns a Promise 
+    (async (ES2017(ES8)) was built ontop of promises (introduced ES62015))
+
+

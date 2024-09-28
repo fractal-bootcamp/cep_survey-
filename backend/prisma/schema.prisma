@@ -14,27 +14,42 @@ datasource db {
 }
 
 model Survey {
-    id String @id @default(uuid())
-
-    name      String
-    questions Question[]
+    id          String     @id @default(uuid())
+    name        String
+    description String?
+    createdAt   DateTime   @default(now())
+    questions   Question[]
 }
 
 model Question {
-    id String @id @default(uuid())
-
-    question String
-
+    id       String @id @default(uuid())
     surveyId String
-    survey   Survey   @relation(fields: [surveyId], references: [id])
+    survey   Survey @relation(fields: [surveyId], references: [id])
+
+    options  String? //multiple choice questions? --> store as
+    question String
+    type     QuestionType
+    // This field can only be one of the values defined in QuestionType
+    required Boolean      @default(false)
     answers  Answer[]
 }
 
 model Answer {
     id String @id @default(uuid())
 
-    answer String
-
+    answer     String
+    value      String //store all answers as strings --parse based on question type 
     questionId String
     question   Question @relation(fields: [questionId], references: [id])
 }
+
+enum QuestionType {
+    TEXT
+    MULTIPLE_CHOICE
+    SCALE
+    YES_NO
+}
+
+//ENUM (enumeration) in prisma is a special "type" that defines a set of named constants
+// meaning -> we are defining four possible types of questions - 
+// in the Question {} model -> type field can only be assigned one of these four values 

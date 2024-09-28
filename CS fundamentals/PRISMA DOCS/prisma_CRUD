@@ -1,0 +1,57 @@
+/* CRUD
+
+CREATE:
+
+    create a single record:
+        create()
+            - single user with two fields 
+
+            const user = await prisma.user.create({
+            data: {
+            email: 'dude@guy.com'
+            name: 'bro'
+            },
+            })
+        ID --> auto generated 
+
+    create a single record using generated types:
+    prisma automatically generates TypeScript types based on your database schema --> 'type saftey'
+
+        const prisma = new PrismaClient()
+        async function main() {
+        let includePosts: boolean = false
+        let user: Prisma.UserCreateInput
+        // Check if posts should be included in the query
+        if (includePosts) {
+            user = {
+            email: 'elsa@prisma.io',
+            name: 'Elsa Prisma',
+            posts: {
+                create: {
+                title: 'Include this post!',
+                },
+            },
+            }
+        } else {
+            user = {
+            email: 'elsa@prisma.io',
+            name: 'Elsa Prisma',
+            }
+        }
+        // Pass 'user' object into query
+        const createUser = await prisma.user.create({ data: user })
+        }
+        main()
+
+    create multiple records 
+        createMany()
+            const createMany = await prisma.user.createMany({
+            data: [
+                { name: 'Bob', email: 'bob@prisma.io' },
+                { name: 'Bobo', email: 'bob@prisma.io' }, // Duplicate unique key!
+                { name: 'Yewande', email: 'yewande@prisma.io' },
+                { name: 'Angelique', email: 'angelique@prisma.io' },
+            ],
+            skipDuplicates: true, // Skip 'Bobo'
+            })
+    
